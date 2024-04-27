@@ -1,3 +1,6 @@
+from .convert import PdfToImages
+from .ocr import GeolangOcr
+
 
 __author__ = 'Lasha Gogua'
 __email__ = 'gogualasha@gmail.com'
