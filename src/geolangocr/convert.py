@@ -13,8 +13,8 @@ class PdfToImages:
 
     def __init__(
         self,
-        input_folder: pathlib.Path = settings.INPUT_DIR,
-        output_folder: pathlib.Path = settings.OUTPUT_DIR,
+        input_folder: typ.Union[str, pathlib.Path] = None,
+        output_folder: typ.Union[str, pathlib.Path] = None,
         **kwargs: typ.Any
     ) -> None:
         """
@@ -26,12 +26,28 @@ class PdfToImages:
         :param kwargs:
         :type kwargs: typ.Any
         """
-        self.input_folder = input_folder
-        if not isinstance(self.input_folder, pathlib.Path):
-            raise TypeError('`input_folder` must be a type of pathlib.Path')
-        self.output_folder = output_folder
-        if not isinstance(self.output_folder, pathlib.Path):
-            raise TypeError('`output_folder` must be a type of pathlib.Path')
+
+        if not input_folder:
+            self.input_folder: pathlib.Path = settings.INPUT_DIR
+        else:
+            if isinstance(input_folder, pathlib.Path):
+                self.input_folder = input_folder
+            else:
+                try:
+                    self.input_folder = pathlib.Path(input_folder)
+                except TypeError:
+                    raise TypeError('Invalid `input_folder` type.')
+
+        if not output_folder:
+            self.output_folder: pathlib.Path = settings.OUTPUT_DIR
+        else:
+            if isinstance(output_folder, pathlib.Path):
+                self.output_folder = output_folder
+            else:
+                try:
+                    self.output_folder = pathlib.Path(output_folder)
+                except TypeError:
+                    raise TypeError(f'Invalid `output_folder` type.')
 
         if self.input_folder.is_dir() is False:
             self.input_folder.mkdir(parents=True, exist_ok=True)
@@ -41,7 +57,7 @@ class PdfToImages:
 
         self.kwargs = kwargs
 
-    def execute(self) -> None:
+    def run(self) -> None:
         if self.input_folder.is_dir() is False:
             raise FileNotFoundError(
                 f'Input folder `{self.input_folder}` does not exists.'
