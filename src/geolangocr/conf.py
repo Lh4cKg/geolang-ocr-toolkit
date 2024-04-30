@@ -11,6 +11,10 @@ class Settings:
     """
 
     BASE_DIR: pathlib.Path = pathlib.Path(__file__).resolve().parent
+    # Levenshtein configuration
+    LEVENSHTEIN_MATCH_THRESHOLD: int = 95
+    TOKEN_FULL_PROCESS: bool = True
+
     try:
         INPUT_DIR: pathlib.Path = pathlib.Path(
             os.environ.get(
@@ -18,6 +22,7 @@ class Settings:
                 BASE_DIR.parent.parent / 'dataset'
             )
         )
+        INPUT_DIR.mkdir(parents=True, exist_ok=True)
     except TypeError:
         raise EnvironmentError(f'Invalid `INPUT_DIR` environment value.')
     try:
@@ -27,6 +32,7 @@ class Settings:
                 INPUT_DIR / 'images'
             )
         )
+        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     except TypeError:
         raise EnvironmentError(f'Invalid `OUTPUT_DIR` environment value.')
 
@@ -38,7 +44,8 @@ settings = Settings()
 # Configure Logging
 
 logging.basicConfig(
-    format='%(levelname)s %(asctime)s %(name)s %(message)s',
+    # format='%(levelname)s %(asctime)s %(name)s %(message)s',
+    format='%(asctime)s - %(message)s',
     datefmt='%d/%m/%Y %H:%M:%S',
     level=logging.INFO
 )
