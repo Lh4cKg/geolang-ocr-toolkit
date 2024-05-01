@@ -7,14 +7,15 @@ from .conf import settings
 def distance(q1: str, q2: str, partial: bool = False) -> int:
     """
     Calculate the Levenshtein distance between two strings
+
     :param q1:
-    :type q1:
+    :type q1: str
     :param q2:
-    :type q2:
+    :type q2: str
     :param partial:
-    :type partial:
-    :return:
-    :rtype:
+    :type partial: bool
+    :return: Calculated Levenshtein distance
+    :rtype: int
     """
     if partial:
         return fuzz.partial_ratio(q1.lower(), q2.lower())
