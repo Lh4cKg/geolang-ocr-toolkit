@@ -31,9 +31,9 @@ $ sudo dnf install tesseract tesseract-devel leptonica-devel leptonica
 
 -----
 
-https://github.com/danbloomberg/leptonica/releases
-https://tesseract-ocr.github.io/tessdoc/Downloads.html
-https://digi.bib.uni-mannheim.de/tesseract/
+1. [Tesseract Docs](https://tesseract-ocr.github.io/)
+2. [Tesseract](https://digi.bib.uni-mannheim.de/tesseract/)
+3. [Leptonica](https://github.com/danbloomberg/leptonica/releases)
 
 # Setup Project 
 
