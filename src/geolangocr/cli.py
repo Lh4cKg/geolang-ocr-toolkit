@@ -3,7 +3,6 @@ import os
 import click
 
 from .convert import PdfToImages
-from .matcher import Matcher
 from .ocr import GeolangOcr
 
 
@@ -21,7 +20,7 @@ def cli():
 @click.option('-t', '--threads', 'threads', default=os.cpu_count(), type=click.INT)
 @click.option('-f', '--fmt', 'fmt', default='png', type=click.STRING)
 def pdf2img(inp, out, threads, fmt):
-    """Converting pdf to images"""
+    """Convert pdf to images"""
     pdf = PdfToImages(
         input_folder=inp,
         output_folder=out,
@@ -31,32 +30,40 @@ def pdf2img(inp, out, threads, fmt):
     pdf.run()
 
 
-@cli.command()
+@cli.command(
+    help="""
+        1. Converting images to text using Tesseract model\n
+        2. Search in the converted texts using search keywords 
+    """,
+    short_help="""
+        1. Converting images to text using Tesseract model\n
+        2. Search keywords in the converted texts 
+    """
+)
 @click.option('-l', '--lang', 'lang', default='Georgian', type=click.STRING)
 @click.option('-s', '--save', 'save', default=False, type=click.BOOL)
-@click.option('--check_convert_pdf', default=False, type=click.BOOL)
+@click.option('--check_convert_pdf', default=True, type=click.BOOL)
+@click.option('--save_matched_output', default=True, type=click.BOOL)
 @click.option('--del_converted_images', default=False, type=click.BOOL)
 @click.option('--del_converted_texts', default=False, type=click.BOOL)
-def img2text(lang, save, check_convert_pdf,
-             del_converted_images, del_converted_texts):
-    """Converting image to text using Tesseract model"""
+def matcher(lang, save, check_convert_pdf, save_matched_output,
+            del_converted_images, del_converted_texts):
+
     glang = GeolangOcr(
         lang=lang,
         save=save,
         check_convert_pdf=check_convert_pdf,
+        save_matched_output=save_matched_output,
         del_converted_images=del_converted_images,
         del_converted_texts=del_converted_texts
     )
     glang.run()
 
 
-@cli.command()
-def matcher():
-    """Command on cli3"""
-    logger.info("Matching sensitive keywords in these texts.")
-
-
-commands = click.CommandCollection(sources=[cli])
+commands = click.CommandCollection(
+    sources=[cli],
+    help="""Geolang OCR command line interface."""
+)
 
 
 if __name__ == '__main__':
