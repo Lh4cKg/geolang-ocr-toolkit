@@ -6,16 +6,25 @@ build-backend = "setuptools.build_meta"
 name = "geolangocr"
 version = "0.2.0"
 authors = [
-  {name="Lasha Gogua", email="gogualasha@gmail.com"},
+    {name="Lasha Gogua", email="gogualasha@gmail.com"},
 ]
 description = "OCR toolkit for Georgian language"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.11",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+dynamic = ["dependencies"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements/prod.txt"]}
+
+[tool.setuptools.package-data]
+"geolangocr.tessdata" = ["*"]
 
 [project.urls]
 Homepage = "https://github.com/Lh4cKg/geolang-ocr-toolkit.git"
