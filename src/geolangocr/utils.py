@@ -1,6 +1,9 @@
+import re
 import pathlib
 import typing as typ
 from pdf2image import convert_from_path
+
+from .conf import settings
 
 
 def pdf_to_image(
@@ -35,3 +38,13 @@ def pdf_to_image(
 
 def is_empty(_dir: pathlib.Path) -> bool:
     return not any(_dir.iterdir())
+
+
+def add_keywords_txt(keywords: str) -> None:
+    file: pathlib.Path = settings.CACHE_DIR / 'keywords.txt'
+    if file.is_file() is False:
+        file.touch()
+
+    with open(file, 'a') as f:
+        for keyword in re.split(r',|\s|\s+', keywords):
+            f.write(f'{keyword}\n')
