@@ -11,6 +11,7 @@ class Settings:
     """
 
     BASE_DIR: pathlib.Path = pathlib.Path(__file__).resolve().parent
+    CURRENT_DIR: pathlib.Path = pathlib.Path(os.getcwd()).resolve()
     # Levenshtein configuration
     LEVENSHTEIN_MATCH_THRESHOLD: int = 95
     TOKEN_FULL_PROCESS: bool = True
@@ -19,7 +20,7 @@ class Settings:
         INPUT_DIR: pathlib.Path = pathlib.Path(
             os.environ.get(
                 'INPUT_DIR',
-                BASE_DIR.parent.parent / 'dataset'
+                CURRENT_DIR.parent.parent / 'dataset'
             )
         )
         INPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -29,7 +30,7 @@ class Settings:
         OUTPUT_DIR: pathlib.Path = pathlib.Path(
             os.environ.get(
                 'OUTPUT_DIR',
-                INPUT_DIR / 'images'
+                CURRENT_DIR / 'images'
             )
         )
         OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
