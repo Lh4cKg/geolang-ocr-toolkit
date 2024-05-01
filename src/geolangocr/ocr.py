@@ -7,6 +7,7 @@ from tesserocr import PyTessBaseAPI, image_to_text
 
 from .conf import settings
 from .convert import PdfToImages
+from .matcher import Matcher
 
 
 logger = logging.getLogger(__name__)
@@ -17,6 +18,7 @@ class GeolangOcr(object):
 
     def __init__(self, lang: str = 'Georgian', save: bool = False,
                  check_convert_pdf: bool = False,
+                 save_matched_output: bool = False,
                  del_converted_images: bool = False,
                  del_converted_texts: bool = False) -> None:
         """
@@ -38,8 +40,9 @@ class GeolangOcr(object):
                 f'Available languages are: {", ".join(self.SUPPORTED_LANGUAGES)}'
             )
         self.lang = lang
-        self.check_convert_pdf = check_convert_pdf
         self.save = save
+        self.check_convert_pdf = check_convert_pdf
+        self.save_matched_output = save_matched_output
         self.del_converted_images = del_converted_images
         self.del_converted_texts = del_converted_texts
 
@@ -57,20 +60,22 @@ class GeolangOcr(object):
             self.process_image(image)
 
     def process_image(self, image) -> str:
-        file_name = image.name.rsplit('.', 1)[0]
+        filename = image.name.rsplit('.', 1)[0]
         image = Image.open(image)
         text = image_to_text(image, lang=self.lang)
         if self.save:
-            self.save_file(file_name, text)
+            self.save_file(filename, text)
+        matcher = Matcher(filename, text, self.save_matched_output)
+        matcher.match()
         return text
 
     @staticmethod
-    def save_file(file_name: str, text: str) -> None:
+    def save_file(filename: str, text: str) -> None:
         output_dir: pathlib.Path = settings.INPUT_DIR / 'texts'
         if output_dir.exists() is False:
             output_dir.mkdir(parents=True, exist_ok=True)
 
-        with open(output_dir / f'{file_name}.txt', 'w') as f:
+        with open(output_dir / f'{filename}.txt', 'w') as f:
             f.write(text)
 
     def stop(self) -> None:
