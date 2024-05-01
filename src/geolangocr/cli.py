@@ -16,15 +16,11 @@ def cli() -> None:
 
 
 @cli.command()
-@click.option('-i', '--input', 'inp', type=click.Path(exists=True))
-@click.option('-o', '--output', 'out', type=click.Path(exists=True))
 @click.option('-t', '--threads', 'threads', default=os.cpu_count(), type=click.INT)
 @click.option('-f', '--fmt', 'fmt', default='png', type=click.STRING)
-def pdf2img(inp: click.Path, out: click.Path, threads: int, fmt: str) -> None:
+def pdf2img(threads: int, fmt: str) -> None:
     """Convert pdf to images"""
     pdf = PdfToImages(
-        input_folder=inp,
-        output_folder=out,
         thread_count=threads,
         fmt=fmt
     )
