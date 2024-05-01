@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools==69.5.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geolangocr"
+version = "0.0.1"
+authors = [
+  {name="Lasha Gogua", email="gogualasha@gmail.com"},
+]
+description = "OCR toolkit for Georgian language"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/Lh4cKg/geolang-ocr-toolkit.git"
+Issues = "https://github.com/Lh4cKg/geolang-ocr-toolkit/issues"
