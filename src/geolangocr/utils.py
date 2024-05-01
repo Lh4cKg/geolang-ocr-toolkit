@@ -41,7 +41,7 @@ def is_empty(_dir: pathlib.Path) -> bool:
 
 
 def add_keywords_txt(keywords: str) -> None:
-    file: pathlib.Path = settings.CURRENT_DIR / 'keywords.txt'
+    file: pathlib.Path = settings.INPUT_DIR / 'keywords.txt'
     if file.is_file() is False:
         file.touch()
 
