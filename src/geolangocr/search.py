@@ -6,7 +6,7 @@ from .conf import settings
 
 def distance(q1: str, q2: str, partial: bool = False) -> int:
     """
-    Calculate the Levenshtein distance between two
+    Calculate the Levenshtein distance between two strings
     :param q1:
     :type q1:
     :param q2:
