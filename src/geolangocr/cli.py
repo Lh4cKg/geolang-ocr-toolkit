@@ -1,16 +1,17 @@
-import logging
 import os
+import logging
 import click
 
 from .convert import PdfToImages
 from .ocr import GeolangOcr
+from .utils import add_keywords_txt
 
 
 logger = logging.getLogger(__name__)
 
 
 @click.group()
-def cli():
+def cli() -> None:
     pass
 
 
@@ -19,7 +20,7 @@ def cli():
 @click.option('-o', '--output', 'out', type=click.Path(exists=True))
 @click.option('-t', '--threads', 'threads', default=os.cpu_count(), type=click.INT)
 @click.option('-f', '--fmt', 'fmt', default='png', type=click.STRING)
-def pdf2img(inp, out, threads, fmt):
+def pdf2img(inp: click.Path, out: click.Path, threads: int, fmt: str) -> None:
     """Convert pdf to images"""
     pdf = PdfToImages(
         input_folder=inp,
@@ -46,9 +47,13 @@ def pdf2img(inp, out, threads, fmt):
 @click.option('--save_matched_output', default=True, type=click.BOOL)
 @click.option('--del_converted_images', default=False, type=click.BOOL)
 @click.option('--del_converted_texts', default=False, type=click.BOOL)
-def matcher(lang, save, check_convert_pdf, save_matched_output,
-            del_converted_images, del_converted_texts):
-
+def matcher(
+        lang: str, save: bool,
+        check_convert_pdf: bool,
+        save_matched_output: bool,
+        del_converted_images: bool,
+        del_converted_texts: bool
+) -> None:
     glang = GeolangOcr(
         lang=lang,
         save=save,
@@ -60,6 +65,13 @@ def matcher(lang, save, check_convert_pdf, save_matched_output,
     glang.run()
 
 
+@cli.command()
+@click.option('-k', '--keywords', type=click.STRING, required=True)
+def add_keywords(keywords: str) -> None:
+    """Add Search Keywords"""
+    add_keywords_txt(keywords)
+
+
 commands = click.CommandCollection(
     sources=[cli],
     help="""Geolang OCR command line interface."""
@@ -67,9 +79,6 @@ commands = click.CommandCollection(
 
 
 if __name__ == '__main__':
-    # import signal
-    # import sys
-    #
     # def signal_handler(sig, frame):
     #     print('You pressed Ctrl+C!')
     #     sys.exit(0)
