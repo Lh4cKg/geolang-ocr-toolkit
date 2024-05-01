@@ -164,3 +164,4 @@ archives/
 dataset/images/
 dataset/texts/
 dataset/*.pdf
+dataset/matches.txt
