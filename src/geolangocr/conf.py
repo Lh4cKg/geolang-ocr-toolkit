@@ -20,7 +20,7 @@ class Settings:
         INPUT_DIR: pathlib.Path = pathlib.Path(
             os.environ.get(
                 'INPUT_DIR',
-                CURRENT_DIR.parent.parent / 'dataset'
+                CURRENT_DIR / 'dataset'
             )
         )
         INPUT_DIR.mkdir(parents=True, exist_ok=True)
