@@ -3,12 +3,12 @@ requires = ["setuptools==69.5.1"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "geolangocr"
+name = "ocrmatcher"
 version = "0.2.0"
 authors = [
     {name="Lasha Gogua", email="gogualasha@gmail.com"},
 ]
-description = "OCR toolkit for Georgian language"
+description = "OCR toolkit"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
@@ -24,8 +24,8 @@ dynamic = ["dependencies"]
 dependencies = {file = ["requirements/prod.txt"]}
 
 [tool.setuptools.package-data]
-"geolangocr.tessdata" = ["*"]
+"ocrmatcher.tessdata" = ["*"]
 
 [project.urls]
-Homepage = "https://github.com/Lh4cKg/geolang-ocr-toolkit.git"
-Issues = "https://github.com/Lh4cKg/geolang-ocr-toolkit/issues"
+Homepage = "https://github.com/Lh4cKg/ocr-toolkit.git"
+Issues = "https://github.com/Lh4cKg/ocr-toolkit/issues"
