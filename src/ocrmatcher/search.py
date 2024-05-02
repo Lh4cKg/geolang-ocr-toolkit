@@ -25,8 +25,10 @@ def distance(q1: str, q2: str, partial: bool = False) -> int:
     )
 
 
-def match(q1: str, q2: str, th: int = settings.LEVENSHTEIN_MATCH_THRESHOLD,
+def match(q1: str, q2: str, th: int = None,
           partial: bool = False) -> typ.Tuple[bool, int]:
+    if not th:
+        th = settings.LEVENSHTEIN_MATCH_THRESHOLD
     dist = distance(q1, q2, partial)
     return dist >= th, dist
 

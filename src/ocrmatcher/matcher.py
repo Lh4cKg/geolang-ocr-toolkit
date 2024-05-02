@@ -55,16 +55,20 @@ class BaseMatcher(object):
 class Matcher(BaseMatcher):
 
     def __init__(self, filename: str, text: str, save: bool = False,
-                 search_keywords: typ.List[str] = None) -> None:
+                 search_keywords: typ.List[str] = None, threshold: int = None
+                 ) -> None:
         super().__init__(search_keywords, save)
         self.filename = filename
         self.text = text
+        self.threshold = threshold
         # TODO should be add exclude found journal logics
 
     def match(self) -> typ.Tuple[bool, int]:
         distance = 0
         for keyword in self.search_keywords:
-            matched, distance = match(self.text, keyword)
+            matched, distance = match(
+                q1=self.text, q2=keyword, th=self.threshold
+            )
             if matched:
                 logger.info(f'This `{keyword}` matched in {self.filename} file.')
                 if self.save is True:

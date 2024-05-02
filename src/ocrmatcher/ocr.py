@@ -24,7 +24,7 @@ class GeolangOcr(object):
     SUPPORTED_LANGUAGES = ('Georgian', 'kat', 'kat_old', 'Occupant-Pigs')
 
     def __init__(self, lang: str = 'Georgian', save: bool = False,
-                 check_convert_pdf: bool = False,
+                 threshold: int = None, check_convert_pdf: bool = False,
                  save_matched_output: bool = False,
                  del_converted_images: bool = False,
                  del_converted_texts: bool = False) -> None:
@@ -48,6 +48,7 @@ class GeolangOcr(object):
             )
         self.lang = lang
         self.save = save
+        self.threshold = threshold
         self.check_convert_pdf = check_convert_pdf
         self.save_matched_output = save_matched_output
         self.del_converted_images = del_converted_images

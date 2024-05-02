@@ -39,12 +39,14 @@ def pdf2img(threads: int, fmt: str) -> None:
 )
 @click.option('-l', '--lang', 'lang', default='Georgian', type=click.STRING)
 @click.option('-s', '--save', 'save', default=False, type=click.BOOL)
+@click.option('--threshold', type=click.INT, required=False)
 @click.option('--check_convert_pdf', default=True, type=click.BOOL)
 @click.option('--save_matched_output', default=True, type=click.BOOL)
 @click.option('--del_converted_images', default=False, type=click.BOOL)
 @click.option('--del_converted_texts', default=False, type=click.BOOL)
 def search(
         lang: str, save: bool,
+        threshold: int,
         check_convert_pdf: bool,
         save_matched_output: bool,
         del_converted_images: bool,
@@ -53,6 +55,7 @@ def search(
     glang = GeolangOcr(
         lang=lang,
         save=save,
+        threshold=threshold,
         check_convert_pdf=check_convert_pdf,
         save_matched_output=save_matched_output,
         del_converted_images=del_converted_images,
