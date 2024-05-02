@@ -111,7 +111,15 @@ Run with specific language
 Search Keywords  
 
  ```bash
- $ python -m ocrmatcher search -l Occupant-Pigs
+ $ python -m ocrmatcher search --lang Occupant-Pigs
+ ```
+
+Run with specific `threshold` for two strings similarity, default is: `95`
+
+Search Keywords  
+
+ ```bash
+ $ python -m ocrmatcher search --threshold 75
  ```
 
 Pdf file convert to images  
