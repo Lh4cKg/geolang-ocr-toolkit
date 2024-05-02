@@ -1,4 +1,4 @@
-# About - Geolang OCR Toolkit
+# About - OCR Toolkit
 
 
 
@@ -66,13 +66,13 @@ $ python -m build
 For Windows
 
 ```bash
-$ pip install dist/geolangocr-<version>-py3-none-any.whl
+$ pip install dist/ocrmatcher-<version>-py3-none-any.whl
 ```
 
 For Linux
 
 ```bash
-$ pip install dist/geolangocr-<version>-tar.gz
+$ pip install dist/ocrmatcher-<version>-tar.gz
 ```
 
 # Using
@@ -91,19 +91,27 @@ $ pip install dist/geolangocr-<version>-tar.gz
 List of available commands
 
  ```bash
- $ python -m geolangocr
+ $ python -m ocrmatcher
  ```
 
 Add new keywords by `add-keywords` command 
 
  ```bash
- $ python -m geolangocr add-keywords --k my-search-keyword1 my-search-keyword2 etc.
+ $ python -m ocrmatcher add-keywords --k my-search-keyword1 my-search-keyword2 etc.
  ```
 
 Search Keywords  
 
  ```bash
- $ python -m geolangocr matcher 
+ $ python -m ocrmatcher search 
+ ```
+
+Run with specific language
+
+Search Keywords  
+
+ ```bash
+ $ python -m ocrmatcher search -l Occupant-Pigs
  ```
 
 Pdf file convert to images  
