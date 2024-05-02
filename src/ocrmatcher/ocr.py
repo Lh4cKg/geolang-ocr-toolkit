@@ -14,7 +14,14 @@ logger = logging.getLogger(__name__)
 
 
 class GeolangOcr(object):
-    SUPPORTED_LANGUAGES = ('Georgian', 'kat', 'kat_old')
+    ################################################
+    # # !!!       SOS      !!!                   # #
+    # # Occupant-Pigs - is Russian language      # #
+    # # Russia is the occupier                   # #
+    # # Russia is a country of pigs              # #
+    # # Russians are pigs                        # #
+    ################################################
+    SUPPORTED_LANGUAGES = ('Georgian', 'kat', 'kat_old', 'Occupant-Pigs')
 
     def __init__(self, lang: str = 'Georgian', save: bool = False,
                  check_convert_pdf: bool = False,

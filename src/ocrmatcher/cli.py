@@ -43,7 +43,7 @@ def pdf2img(threads: int, fmt: str) -> None:
 @click.option('--save_matched_output', default=True, type=click.BOOL)
 @click.option('--del_converted_images', default=False, type=click.BOOL)
 @click.option('--del_converted_texts', default=False, type=click.BOOL)
-def matcher(
+def search(
         lang: str, save: bool,
         check_convert_pdf: bool,
         save_matched_output: bool,

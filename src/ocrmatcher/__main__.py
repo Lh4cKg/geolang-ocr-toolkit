@@ -1,5 +1,5 @@
 import logging
-from geolangocr.cli import commands
+from ocrmatcher.cli import commands
 
 
 logger = logging.getLogger(__name__)
