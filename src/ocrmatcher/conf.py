@@ -30,7 +30,7 @@ class Settings:
         OUTPUT_DIR: pathlib.Path = pathlib.Path(
             os.environ.get(
                 'OUTPUT_DIR',
-                CURRENT_DIR / 'images'
+                INPUT_DIR / 'images'
             )
         )
         OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
