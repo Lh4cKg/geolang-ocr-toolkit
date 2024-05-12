@@ -22,7 +22,12 @@ class BaseMatcher(object):
                 raise TypeError(f'`search_keywords` must be a list.')
             self.search_keywords = search_keywords
 
-    def match(self):
+    def match(
+            self, filename: str,
+            text: str,
+            search_keywords: typ.List[str] = None,
+            threshold: int = None
+    ) -> typ.Tuple[bool, int]:
         raise NotImplementedError
 
     @staticmethod
@@ -35,7 +40,12 @@ class BaseMatcher(object):
             #     f'must be added to `{settings.INPUT_DIR}`.'
             # )
         with open(keywords_file) as f:
-            return list(filter(lambda s: s.strip(), f.readlines()))
+            kws = list()
+            for kw in f.readlines():
+                kw = kw.strip()
+                if kw:
+                    kws.append(kw)
+            return kws
 
     @staticmethod
     def save_file(filename: str, keyword: str) -> None:
@@ -54,28 +64,27 @@ class BaseMatcher(object):
 
 class Matcher(BaseMatcher):
 
-    def __init__(self, filename: str, text: str, save: bool = False,
-                 search_keywords: typ.List[str] = None, threshold: int = None
-                 ) -> None:
-        super().__init__(search_keywords, save)
-        self.filename = filename
-        self.text = text
-        self.threshold = threshold
-        # TODO should be add exclude found journal logics
-
-    def match(self) -> typ.Tuple[bool, int]:
+    def match(
+            self,
+            filename: str,
+            text: str,
+            search_keywords: typ.List[str] = None,
+            threshold: int = None
+    ) -> typ.Tuple[bool, int]:
+        if search_keywords is None:
+            search_keywords = self.search_keywords
         distance = 0
-        for keyword in self.search_keywords:
+        for keyword in search_keywords:
             matched, distance = match(
-                q1=self.text, q2=keyword, th=self.threshold
+                q1=text, q2=keyword, th=threshold
             )
             if matched:
-                logger.info(f'This `{keyword}` matched in {self.filename} file.')
+                logger.info(f'This `{keyword}` matched in {filename} file.')
                 if self.save is True:
-                    self.save_file(self.filename, keyword)
+                    self.save_file(filename, keyword)
                 return matched, distance
 
-        logger.info(f'Keywords does not matched in `{self.filename}` file.')
+        logger.info(f'Keywords does not matched in `{filename}` file.')
         return False, distance
 
 

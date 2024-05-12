@@ -50,9 +50,9 @@ class GeolangOcr(object):
         self.save = save
         self.threshold = threshold
         self.check_convert_pdf = check_convert_pdf
-        self.save_matched_output = save_matched_output
         self.del_converted_images = del_converted_images
         self.del_converted_texts = del_converted_texts
+        self.matcher = Matcher(save=save_matched_output)
 
     @staticmethod
     def convert_pdf2images() -> None:
@@ -73,8 +73,8 @@ class GeolangOcr(object):
         text = image_to_text(image, lang=self.lang)
         if self.save:
             self.save_file(filename, text)
-        matcher = Matcher(filename, text, self.save_matched_output)
-        matcher.match()
+
+        self.matcher.match(filename=filename, text=text)
         return text
 
     @staticmethod
