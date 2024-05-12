@@ -1,2 +1,3 @@
 -r prod.txt
 ipython
+build==1.2.1
