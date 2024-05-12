@@ -35,7 +35,7 @@ class BaseMatcher(object):
             #     f'must be added to `{settings.INPUT_DIR}`.'
             # )
         with open(keywords_file) as f:
-            return f.readlines()
+            return list(filter(lambda s: s.strip(), f.readlines()))
 
     @staticmethod
     def save_file(filename: str, keyword: str) -> None:
