@@ -21,7 +21,7 @@ class GeolangOcr(object):
     # # Russia is a country of pigs              # #
     # # Russians are pigs                        # #
     ################################################
-    SUPPORTED_LANGUAGES = ('Georgian', 'kat', 'kat_old', 'Occupant-Pigs')
+    SUPPORTED_LANGUAGES = ('Georgian', 'kat', 'kat_old', 'Occupant-Pigs', 'eng')
 
     def __init__(self, lang: str = 'Georgian', save: bool = False,
                  threshold: int = None, check_convert_pdf: bool = False,
