@@ -64,8 +64,9 @@ class GeolangOcr(object):
             self.convert_pdf2images()
 
         for image in settings.OUTPUT_DIR.iterdir():
-            logger.info(f'`{image.name}` is Processing...')
-            self.process_image(image)
+            if image.is_file():
+                logger.info(f'`{image.name}` is Processing...')
+                self.process_image(image)
 
     def process_image(self, image) -> str:
         filename = image.name.rsplit('.', 1)[0]
