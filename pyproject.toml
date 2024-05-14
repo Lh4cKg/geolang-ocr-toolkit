@@ -1,5 +1,7 @@
 [build-system]
-requires = ["setuptools==69.5.1"]
+requires = [
+    "setuptools==69.5.1"
+]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -20,11 +22,23 @@ classifiers = [
 ]
 dynamic = ["dependencies"]
 
+[project.scripts]
+ocrmatcher = "ocrmatcher.cli:commands"
+
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements/prod.txt"]}
 
 [tool.setuptools.package-data]
 "ocrmatcher.tessdata" = ["*"]
+
+# ========================
+#          BLACK
+# ========================
+[tool.black]
+line-length = 80
+target-version = ["py310"]
+skip-string-normalization = true
+
 
 [project.urls]
 Homepage = "https://github.com/Lh4cKg/ocr-toolkit.git"
