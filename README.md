@@ -1,5 +1,5 @@
 # About - OCR Toolkit
-
+Search pre-defined keywords into the scanned PDF files using Levenshtein algorithm.  
 
 
 # Prerequisites
@@ -91,19 +91,24 @@ $ pip install dist/ocrmatcher-<version>-tar.gz
 List of available commands
 
  ```bash
- $ python -m ocrmatcher
+ $ ocrmatcher --help
+ ```
+Or
+
+ ```bash
+ $ python -m ocrmatcher --help
  ```
 
 Add new keywords by `add-keywords` command 
 
  ```bash
- $ python -m ocrmatcher add-keywords --k my-search-keyword1 my-search-keyword2 etc.
+ $ ocrmatcher add-keywords --k my-search-keyword1 my-search-keyword2 etc.
  ```
 
 Search Keywords  
 
  ```bash
- $ python -m ocrmatcher search 
+ $ ocrmatcher search 
  ```
 
 Run with specific language
@@ -111,7 +116,7 @@ Run with specific language
 Search Keywords  
 
  ```bash
- $ python -m ocrmatcher search --lang Occupant-Pigs
+ $ ocrmatcher search --lang Occupant-Pigs
  ```
 
 Run with specific `threshold` for two strings similarity, default is: `95`
@@ -119,11 +124,11 @@ Run with specific `threshold` for two strings similarity, default is: `95`
 Search Keywords  
 
  ```bash
- $ python -m ocrmatcher search --threshold 75
+ $ ocrmatcher search --threshold 75
  ```
 
 Pdf file convert to images  
 
  ```bash
- $ python -m geolangocr pdf2img 
+ $ ocrmatcher pdf2img 
  ```
