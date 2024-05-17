@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -ex
+
+CODE_PATH=/code
+VENV="${CODE_PATH}"
+cd "${CODE_PATH}"
+mkdir -p dist
+chmod 777 dist
+
+"${VENV}"/bin/pip3 install -q -r requirements/build.txt
+
+ls -la dist/
+mv dist/ocrmatcher /usr/local/bin
+ocrmatcher --version
