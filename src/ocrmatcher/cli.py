@@ -2,6 +2,7 @@ import os
 import logging
 import click
 
+from . import get_version
 from .convert import PdfToImages
 from .ocr import GeolangOcr
 from .utils import add_keywords_txt
@@ -71,10 +72,22 @@ def add_keywords(keywords: str) -> None:
     add_keywords_txt(keywords)
 
 
-commands = click.CommandCollection(
-    sources=[cli],
-    help="""Geolang OCR command line interface."""
-)
+@click.group()
+@click.version_option(version='awdawd')
+def version_cli():
+    pass
+
+
+# commands = click.CommandCollection(
+#     sources=[cli],
+#     help="""Geolang OCR command line interface."""
+# )
+
+
+@click.command(cls=click.CommandCollection, sources=[cli])
+@click.version_option(get_version(), '--version', '-V')
+def commands():
+    pass
 
 
 if __name__ == '__main__':
